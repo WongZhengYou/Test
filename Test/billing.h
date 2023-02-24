@@ -14,14 +14,13 @@ struct Client {
 };
 
 
-
 struct Bill {
     string bill_id;
     Client client;
     string vehicleTitle;
-    int price;
+    float price;
     float tax;
-    int total;
+    float total;
 };
 vector<Bill>bills;
 
@@ -72,16 +71,18 @@ void generateBill(Client clients[], int numClients, vector<vector<string>> conte
     Client client;
     bool foundClient = false;
     for (int i = 0; i < numClients; i++) {
-        if (clients[0].name == name) {
+        if (clients[i].name == name) {
             client = clients[i];
             foundClient = true;
-
-        }
-        else {
-            cout << "Error: Client not found." << endl;
-            return;
+            break;
         }
     }
+    if (!foundClient)
+    {
+        cout << "Error: Client not found." << endl;
+        return;
+    }
+
 
     string vehicleTitle;
     cout << "Enter the complete vehicle title:  ";
@@ -102,6 +103,9 @@ void generateBill(Client clients[], int numClients, vector<vector<string>> conte
         cout << "Enter the complete vehicle title:  ";
         getline(cin, vehicleTitle);
     }
+    // Calculate the bill amount
+    tax = price * 0.10;
+    total = price + tax;
 
     struct Bill bill = {
            bill_id,
@@ -111,9 +115,7 @@ void generateBill(Client clients[], int numClients, vector<vector<string>> conte
            tax,
            total
     };
-    // Calculate the bill amount
-    tax = price * 0.10;
-    total = price + tax;
+
     // Create the bill and add it to the bills vector
     bills.push_back(bill);
     // Display the bill details
@@ -125,6 +127,7 @@ void generateBill(Client clients[], int numClients, vector<vector<string>> conte
     cout << "Price: " << price << endl;
     cout << "Tax: " << tax << endl;
     cout << "Total: " << total << endl;
+    
 }
 
 

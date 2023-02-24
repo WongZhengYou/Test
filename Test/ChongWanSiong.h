@@ -52,7 +52,7 @@ struct search {
         }
     }
 
-    void searchbyTransEngine(vector<vector<string>>& content){ // Remove "std::"
+    void searchbyTransEngine(vector<vector<string>>& content){ 
         int start_year, end_year;
         string fuel_type, transmission;
         double start_engine_size, end_engine_size;
@@ -69,7 +69,7 @@ struct search {
             double engine_size;
             try {
                 year = stoi(row[2]);
-                engine_size = stod(row[6]); // Remove "std::"
+                engine_size = stod(row[6]); 
             } catch (const invalid_argument&) {
                 continue;
             }
@@ -83,10 +83,10 @@ struct search {
         // Sort the results by engine size using bubble sort
         for (int i = 0; i < results.size(); i++) {
             for (int j = 0; j < results.size() - 1; j++) {
-                double engine_size1 = stod(results[j][6]); // Remove "std::"
-                double engine_size2 = stod(results[j+1][6]); // Remove "std::"
+                double engine_size1 = stod(results[j][6]); 
+                double engine_size2 = stod(results[j+1][6]); 
                 if (engine_size1 > engine_size2) {
-                    swap(results[j], results[j+1]); // Remove "std::"
+                    swap(results[j], results[j+1]); 
                 }
             }
         }
@@ -112,6 +112,7 @@ struct Invoice {
     string url;
     string invoice_date;
     float price;
+    float priceAfterDiscount;
 };
 vector<Invoice>invoices;
 
@@ -120,6 +121,8 @@ void create_invoice(vector<vector<string>>& content) {
     static int id_counter = 1;
     string invoice_id = "ID" + to_string(id_counter++);
     float price = 0.0;
+    float discount = 0.0;
+    float priceAfterDiscount = 0.0;
     string invoice_date, url;
     string registration_year;
     string mileage , engine_size;
@@ -130,6 +133,8 @@ void create_invoice(vector<vector<string>>& content) {
     cout << "Enter the complete vehicle title:  ";
     cin.ignore();
     getline(cin, vehicle_title);
+
+   
 
     bool found = false;
     while (!found) {
@@ -150,6 +155,8 @@ void create_invoice(vector<vector<string>>& content) {
             cout << "Enter the complete vehicle title:  ";
             getline(cin, vehicle_title);
         }
+    discount = price * 0.10;
+    priceAfterDiscount = price - discount;
 
     // Get invoice date from user input
     cout << "Enter the invoice date (YYYY-MM-DD): ";
@@ -164,7 +171,8 @@ void create_invoice(vector<vector<string>>& content) {
         engine_size,
         url,
         invoice_date,
-        price
+        price,
+        priceAfterDiscount
     };
 
     // Add invoice to vector
@@ -182,6 +190,7 @@ void create_invoice(vector<vector<string>>& content) {
     cout << "URL: " << url << endl;
     cout << "Invoice Date: " << invoice_date << endl;
     cout << "Price: " << fixed <<  setprecision(2) << price << endl;
+    cout << "Price after discount: " << priceAfterDiscount << endl;
     }
 
 };

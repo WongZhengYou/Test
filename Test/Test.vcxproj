@@ -136,7 +136,7 @@
     <ClInclude Include="vehicle.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="search.cpp" />
+    <ClCompile Include="Main_Function.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

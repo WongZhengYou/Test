@@ -92,7 +92,7 @@ float calculateAveragePrice(vector<vector<string>>content) {
 //}
 struct report
 {
-    void generateClientReport(const vector<vector<string>>& content, vector<Vehicle>vehicles) {
+    void generateClientReport(const vector<vector<string>>& content) {
         vector<Invoice>invoices;
 
         // Generate report header
@@ -147,24 +147,36 @@ struct report
         }
     }
 
+    void generateBillingReport(/*const vector<Bill>& bills*/) {
+        // Generate billing report
+        //cout << "-----------------Billing Report-----------------" << endl;
+        //cout << "Total number of bills generated: " << bills.size() << endl;
+        //if (bills.empty()) {
+        //    cout << "No bills found." << endl;
+        //    return;
+        //}
+        //float totalRevenue = 0.0;
+        //for (auto bill : bills) {
+        //    totalRevenue += bill.total;
+        //}
+        //cout << "Total revenue generated: " << totalRevenue << endl;
 
-
-        void generateBilingReport(vector<vector<string>>&content, vector<Vehicle>vehicles) {
-            //Generate report header
-            cout << "---------------------- BILLING REPORT ----------------------" << endl;
-            cout << "Client Name:" << "" << endl;
-            cout << "Client Information" << "" << endl;
-            cout << "---------------------- VEHICLE INFORMATION ----------------------" << endl;
-            cout << "Car ID" << "" << endl;
-            cout << "Car Price" << "" << endl;
-            cout << "Date" << "" << endl;
-            //Generate report end
-            cout << "-----------------------------------------------------------" << endl;
-
+        //// Generate individual bill reports
+        //for (auto bill : bills) {
+        //    cout << "---------------BILL REPORT--------------" << endl;
+        //    cout << "Bill ID:" << bill.bill_id << endl;
+        //    cout << "Client: " << bill.client.name << endl;
+        //    cout << "Vehicle Title: " << bill.vehicleTitle << endl;
+        //    cout << "Price: " << bill.price << endl;
+        //    cout << "Tax: " << bill.tax << endl;
+        //    cout << "Total: " << bill.total << endl;
         }
     
-
 };
+
+
+
+
 
 
 //// Function to split a string into an array of strings

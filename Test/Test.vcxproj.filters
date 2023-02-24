@@ -34,7 +34,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="search.cpp">
+    <ClCompile Include="Main_Function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

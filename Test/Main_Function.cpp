@@ -8,7 +8,6 @@
 #include "billing.h"
 
 using namespace std;
-const int MAX_USERS = 100;
 
 struct Role {
     string MANAGER;
@@ -21,8 +20,9 @@ struct User {
     Role role;
 };
 
-User users[MAX_USERS];
+User users[100];
 int user_count = 0;
+
 
 void add_user(string username, string password, Role role) {
     users[user_count].username = username;
@@ -31,46 +31,6 @@ void add_user(string username, string password, Role role) {
     user_count++;
 }
 
-//// Function to split a string into an array of strings
-//vector<string> split(const string& s, char delimiter) {
-//    vector<string> tokens;
-//    string token;
-//    istringstream tokenStream(s);
-//    while (getline(tokenStream, token, delimiter)) {
-//        if (!token.empty()) {  // add this line to skip empty tokens
-//            tokens.push_back(token);
-//        }
-//    }
-//    return tokens;
-//}
-//vector<Vehicle> arrayvehicle( ) {
-//    vector<Vehicle> vehicles;
-//    int numVehicles = 0;
-//    ifstream inputFile("carlist.csv");
-//    string line;
-//    getline(inputFile, line);  // skip the header line
-//
-//    while (getline(inputFile, line)) {
-//        vector<string> fields = split(line, ',');
-//        if (fields.size() != 12) {  // skip rows with missing fields
-//            continue;
-//        }
-//        vehicles[numVehicles].title = fields[0];
-//        vehicles[numVehicles].price = fields[1].substr(2);
-//        vehicles[numVehicles].registrationDate = fields[2];
-//        vehicles[numVehicles].fuelType = fields[4];
-//        vehicles[numVehicles].transmission = fields[5];
-//        vehicles[numVehicles].engineSize = fields[6];
-//        vehicles[numVehicles].doors = fields[7];
-//        vehicles[numVehicles].color = fields[8];
-//        vehicles[numVehicles].bodyType = fields[9];
-//        vehicles[numVehicles].URL = fields[10];
-//        vehicles[numVehicles].saleDates = fields[11];
-//        numVehicles++;
-//    }
-//    inputFile.close();
-//    return vehicles;
-//}
 
 
 int totalCars(vector<Vehicle>vehicles) {
@@ -101,7 +61,10 @@ bool login(string username, string password, Role& role) {
 int main() {
 
     vector<vector<string>> content;
-
+    Client clients[100];
+    vector<Invoice>invoices;
+    vector<Bill> bills;
+    int numClients = 0;
     // Open the CSV file
     ifstream file("carlist.csv");
 
@@ -175,6 +138,7 @@ int main() {
                             }
                             case 3: {
                                 // Back to main menu
+                                main();
                                 break;
                             }
                             default: {
@@ -194,9 +158,7 @@ int main() {
                     case 3: {
                         string choice;
                         bool validInput = false;
-                        vector<Vehicle>vehicles;
-                        vector<Invoice>invoices;
-                        ;                   report r;
+                        report r;
 
                         while (!validInput) {
                             cout << "What report you want to generate:\n1)Sales report\n2)Client report\n3)Billing report\nMy choice is (1/2/3):";
@@ -212,12 +174,13 @@ int main() {
                                 // Generate client report
                                 validInput = true;
 
-                                r.generateClientReport(content, vehicles);
+                                r.generateClientReport(content);
                             }
                             else if (choice == "3") {
                                 // Generate billing report
-                                validInput = true;
-                                r.generateBilingReport(content, vehicles);
+
+   /*                             r.generateBillingReport(bills);*/
+
                             }
                             else {
                                 cout << "Invalid input. Please enter 1, 2, or 3.\n";
@@ -239,7 +202,7 @@ int main() {
             
             }
             else {
-                cout << "Welcome to the staff page." << endl;
+                cout << "Welcome to the salesperson page." << endl;
                 int choice;
                 do {
                     cout << "Please select an option:\n";
@@ -275,6 +238,7 @@ int main() {
                             }
                             case 3: {
                                 // Back to main menu
+                                main();
                                 break;
                             }
                             default: {
@@ -292,26 +256,20 @@ int main() {
                         break;
                     }
                     case 3: {
-                        Client clients[100];
-                        int numClients = 0;
                         addClient(clients, numClients);
+                        cout << "Client: " << clients[numClients-1].name << "\n" << endl;
                         break;
                     }
                     case 4: {
-                        Client clients[100];
-                        int numClients = 0;
-
-                        vector<Bill> bills;
-        
-
-                        // call the generateBill function
+                        // Call generateBill function
                         generateBill(clients, numClients, content);
                         break;
 
                     }
                     case 5: {
-                        cout << "Going out haiyaa\n";
+                        cout << "Going out \n";
                         main();
+                        break;
                     }
                     default: {
                         cout << "Invalid choice. Please try again.\n";
@@ -361,7 +319,7 @@ int main() {
                             break;
                         }
                         case 3: {
-
+                            main();
                             break;
                         }
 
@@ -380,17 +338,12 @@ int main() {
                     break;
                 }
                 case 3: {
-                    Client clients[100];
-                    int numClients = 0;
+
                     addClient(clients, numClients);
-                    cout << "Client:"<<clients->name <<"\n" << endl;
+                    cout << "Client: " << clients[numClients - 1].name << "\n" << endl;
                     break;
                 }
                 case 4:{
-                    Client clients[100];
-                    int numClients = 0;
-                    vector<Bill> bills;
-                    vector<vector<string>> content;
                     // Call generateBill function
                     generateBill(clients, numClients, content);
                     break;
