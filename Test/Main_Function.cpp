@@ -58,7 +58,26 @@ bool login(string username, string password, Role& role) {
 
 
 
+
 int main() {
+
+    vector<Vehicle> vehicles = {
+        {"Toyota Camry", 25000.00, "Red", false},
+        {"Honda Civic", 22000.00, "Blue", false},
+        {"Ford Mustang", 35000.00, "Black", false},
+        {"Chevrolet Corvette", 65000.00, "Yellow", false},
+        {"Jeep Wrangler", 32000.00, "Green", false},
+        {"BMW 3 Series", 42000.00, "Silver", false},
+        {"Audi A4", 38000.00, "Gray", false},
+        {"Tesla Model S", 80000.00, "White", false},
+        {"Nissan Altima", 24000.00, "Red", false},
+        {"Kia Soul", 20000.00, "Black", false},
+        {"Mazda CX-5", 28000.00, "Blue", false},
+        {"Subaru Outback", 32000.00, "Gray", false},
+        {"Toyota RAV4", 27000.00, "White", false},
+        {"Honda CR-V", 26000.00, "Green", false},
+        {"Ford Explorer", 40000.00, "Silver", false}
+    };
 
     vector<vector<string>> content;
     Client clients[100];
@@ -210,7 +229,8 @@ int main() {
                     cout << "2. Create Invoice\n";
                     cout << "3. Regiter Client\n";
                     cout << "4. Create bill\n";
-                    cout << "5. Exit\n";
+                    cout << "5. Book Vehicle\n";
+                    cout << "6. Exit\n";
                     cout << "Your choice: ";
                     cin >> choice;
 
@@ -267,6 +287,10 @@ int main() {
 
                     }
                     case 5: {
+                        bookVehicle(clients, numClients, vehicles);
+                        break;
+                    }
+                    case 6: {
                         cout << "Going out \n";
                         main();
                         break;
@@ -292,7 +316,8 @@ int main() {
                 cout << "2. Create Invoice\n";
                 cout << "3. Regiter Client\n";
                 cout << "4. Create bill\n";
-                cout << "5. Exit\n";
+                cout << "5. Book Vehicle\n";
+                cout << "6. Exit\n";
                 cout << "Your choice: ";
                 cin >> choice;
 
@@ -338,7 +363,6 @@ int main() {
                     break;
                 }
                 case 3: {
-
                     addClient(clients, numClients);
                     cout << "Client: " << clients[numClients - 1].name << "\n" << endl;
                     break;
@@ -349,6 +373,10 @@ int main() {
                     break;
                 }
                 case 5: {
+                    bookVehicle(clients, numClients, vehicles);
+                    break;
+                }
+                case 6: {
                     cout << "existing system.....\n";
                     main();
                     break;

@@ -11,8 +11,16 @@ struct Client {
     string address;
     string email;
     string dob;
+    string bookedVehicles;
 };
 
+struct Vehicle
+{
+    string title;
+    double price;
+    string color;
+    bool isBooked;
+}; 
 
 struct Bill {
     string bill_id;
@@ -49,10 +57,10 @@ void addClient(Client clients[], int& numClients) {
     cout << "Add another client? (y/n): ";
     cin >> choice;
     cin.ignore(); // consume newline character left in input buffer
-
     if (choice == 'y' || choice == 'Y') {
         addClient(clients, numClients);
     }
+
 }
 void generateBill(Client clients[], int numClients, vector<vector<string>> content) {
     static int id_counter = 1;
@@ -127,8 +135,81 @@ void generateBill(Client clients[], int numClients, vector<vector<string>> conte
     cout << "Price: " << price << endl;
     cout << "Tax: " << tax << endl;
     cout << "Total: " << total << endl;
-    
+    return;
 }
+
+
+
+void bookVehicle(Client clients[], int numClients, vector<Vehicle>& vehicles) {
+
+    // Prompt user to enter client name
+    string name;
+    cout << "Enter client name: ";
+    cin >> name;
+
+    // Find the client in the clients array
+    Client client;
+    bool foundClient = false;
+    for (int i = 0; i < numClients; i++) {
+        if (clients[i].name == name) {
+            client = clients[i];
+            foundClient = true;
+            break;
+        }
+    }
+    if (!foundClient) {
+        cout << "Error: Client not found." << endl;
+        return;
+    }
+
+    // Display the list of vehicles
+    cout << "List of vehicles: " << endl;
+    for (int i = 0; i < vehicles.size(); i++) {
+        cout << i + 1 << ". " << vehicles[i].title << " - " << vehicles[i].color << " - $" << vehicles[i].price;
+        if (vehicles[i].isBooked) {
+            cout << " (Booked)";
+        }
+        cout << endl;
+    }
+
+    // Prompt user to select a vehicle
+    int choice;
+    cout << "Enter the number of the vehicle you would like to book: ";
+    cin >> choice;
+
+    // Validate user input
+    if (choice < 1 || choice > vehicles.size()) {
+        cout << "Error: Invalid choice." << endl;
+        return;
+    }
+
+    // Check if selected vehicle is already booked
+    if (vehicles[choice - 1].isBooked) {
+        cout << "Error: Vehicle is already booked." << endl;
+        return;
+    }
+
+    // Add the selected vehicle to the client's booked vehicles
+    string vehicleTitle = vehicles[choice - 1].title;
+    vector<Vehicle> bookedVehicles;
+    bookedVehicles.push_back(vehicles[choice - 1]);
+    // Update the booked status of the selected vehicle
+    vehicles[choice - 1].isBooked = true;
+
+    // Display booking information
+    cout << "Vehicle booked: " << vehicles[choice - 1].title << endl;
+
+    cout << endl << "Booking Receipt for " << client.name << ":" << endl << endl;
+    cout << "Vehicle: " << bookedVehicles.back().title << endl;
+    cout << "Color: " << bookedVehicles.back().color << endl;
+    cout << "Price: $" << bookedVehicles.back().price << endl;
+    return;
+}
+
+
+
+
+
 
 
 

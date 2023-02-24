@@ -1,2 +1,0 @@
-
-        cin >> end_year;

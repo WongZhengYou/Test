@@ -9,22 +9,6 @@ using namespace std;
 
 const int MAX_VEHICLES = 2000;  // Maximum number of vehicles in the CSV file
 
-struct Vehicle {
-    string title;
-    string price;
-    string registrationDate;
-    string mileage;
-    string fuelType;
-    string transmission;
-    string engineSize;
-    string doors;
-    string color;
-    string bodyType;
-    string URL;
-    string saleDates;
-};
-
-int totalCars();
 struct Invoice {
     string invoice_id,
         vehicle_title,
@@ -55,14 +39,7 @@ int calculateRevenue(vector<vector<string>>content) {
     return totalRevenue;
 }
 
-//int calculateRevenue(vector<Vehicle>& vehicles) {
-//    int totalRevenue = 0;
-//    for (const auto& v : vehicles) {
-//        int price = stoi(v.price);
-//        totalRevenue + price;
-//    }
-//    return totalRevenue;
-//}
+
 float calculateAveragePrice(vector<vector<string>>content) {
     int totalRevenue = 0;
     int numVehicles = content.size();
@@ -80,16 +57,7 @@ float calculateAveragePrice(vector<vector<string>>content) {
     float avgPrice = static_cast<float>(totalRevenue) / numVehicles;
     return avgPrice;
 }
-//float calculateAveragePrice(vector<Vehicle>& vehicles) {
-//    // Calculate the average price of all vehicles
-//    int numVehicles = vehicles.size();
-//    float totalRevenue = 0.0;
-//    for (const auto& v : vehicles) {
-//        int price = stoi(v.price);
-//        totalRevenue + price;
-//    }
-//    return totalRevenue / numVehicles;
-//}
+
 struct report
 {
     void generateClientReport(const vector<vector<string>>& content) {
@@ -173,123 +141,3 @@ struct report
         }
     
 };
-
-
-
-
-
-
-//// Function to split a string into an array of strings
-//vector<string> split(const string& s, char delimiter) {
-//    vector<string> tokens;
-//    string token;
-//    istringstream tokenStream(s);
-//    while (getline(tokenStream, token, delimiter)) {
-//        if (!token.empty()) {  // add this line to skip empty tokens
-//            tokens.push_back(token);
-//        }
-//    }
-//    return tokens;
-//}
-//
-//int calculateTotalData() {
-//    vector<vector<string>> content;
-//
-//    // Open the CSV file
-//    ifstream file("carlist.csv");
-//
-//    // Read the header row from the file
-//    string header;
-//    getline(file, header);
-//
-//    // Read the data from the file
-//    string line;
-//    int totalData = 0;
-//    while (getline(file, line)) {
-//        vector<string> row;
-//        istringstream ss(line);
-//        string cell;
-//        while (getline(ss, cell, ',')) {
-//            row.push_back(cell);
-//        }
-//        content.push_back(row);
-//        totalData++;
-//    }
-//
-//    file.close();
-//    return totalData;
-//}
-//int numVehiclesSold(const vector<vector<string>>& content) {
-//    int count = 0;
-//    for (const auto& row : content) {
-//        if (!row[11].empty()) {  // Check if the sold_date field is not empty
-//            count++;
-//        }
-//    }
-//    return count;
-//}
-
-
-//int report() {
-//   
-//    return 0;
-//}
-//// calculate total revenue and number of vehicles sold
-//double totalRevenue = 0;
-//int numVehiclesSold = 0;
-//for (auto invoice : invoices) {
-//    totalRevenue += invoice.price;
-//    numVehiclesSold += invoice.vehicle_title.size();
-//}
-//// sort the invoices by date before generating the sales report
-//sort(invoices.begin(), invoices.end(), [](const Invoice& a, const Invoice& b) {
-//    return a.invoice_date < b.invoice_date;
-//    });
-//// generate report header
-//cout << "---------------------- SALES REPORT ----------------------" << endl;
-//cout << "Total vehicles sold: " << numVehiclesSold << endl;
-//cout << "Total revenue: $" << fixed << setprecision(2) << totalRevenue << endl;
-
-//// generate report body
-//cout << "--------------------- SALES DETAILS ----------------------" << endl;
-//for (auto invoice : invoices) {
-//    cout << "Invoice ID: " << invoice.invoice_id << endl;
-//    cout << "Date: " << invoice.invoice_date << endl;
-//    cout << "Total price: $" << fixed << setprecision(2) << invoice.price << endl;
-//    cout << "Vehicles sold:" << endl;
-//    for (auto vehicle : invoice.vehicle_title) {
-//        cout << "    " << invoice.vehicle_title << endl;
-//    }
-//    cout << endl;
-//}
-
-//// generate report footer
-//cout << "-----------------------------------------------------------" << endl;
-// 
-//int readCSV( Vehicle vehicles[]) {
-//    int numVehicles = 0;
-//    ifstream inputFile("carlist.csv");
-//    string line;
-//    getline(inputFile, line);  // skip the header line
-//
-//    while (getline(inputFile, line)) {
-//        vector<string> fields = split(line, ',');
-//        if (fields.size() != 12) {  // skip rows with missing fields
-//            continue;
-//        }
-//        vehicles[numVehicles].title = fields[0];
-//        vehicles[numVehicles].price = fields[1].substr(2);
-//        vehicles[numVehicles].registrationDate = fields[2];
-//        vehicles[numVehicles].fuelType = fields[4];
-//        vehicles[numVehicles].transmission = fields[5];
-//        vehicles[numVehicles].engineSize = fields[6];
-//        vehicles[numVehicles].doors = fields[7];
-//        vehicles[numVehicles].color = fields[8];
-//        vehicles[numVehicles].bodyType = fields[9];
-//        vehicles[numVehicles].URL = fields[10];
-//        vehicles[numVehicles].saleDates = fields[11];
-//        numVehicles++;
-//    }
-//    inputFile.close();
-//    return numVehicles;
-//}
